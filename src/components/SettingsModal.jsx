@@ -49,6 +49,7 @@ function SettingsModal(props) {
             </Link>
           </div>
         ))}
+        <div></div>
       </div>
     </div>
   );
