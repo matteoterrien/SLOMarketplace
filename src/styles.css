@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+:root {
+  --color-primary_bg: #90a955; /* Lightmode background color */
+  --color-secondary_bg: #ecf39e;
+  --color-accent0: #4f772d; /* Main contrast color */
+  --color-accent1: #31572c; /* Secondary contrast color */
+  --color-accent2: #132a13; /* Third contrast color */
+}
