@@ -10,7 +10,7 @@ function App() {
   const [darkmode, setDarkMode] = useState(false);
 
   const toggleDarkMode = () => {
-    setDarkMode(!darkmode);
+    setDarkMode((prev) => !prev);
   };
 
   const changeUsername = (e) => {

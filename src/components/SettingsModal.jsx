@@ -1,5 +1,6 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Link } from "react-router";
+import { Spinner } from "./Spinner";
 
 const links = [
   { to: "/", label: "Home" },
@@ -9,11 +10,16 @@ const links = [
 
 function SettingsModal(props) {
   const ref = useRef(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleOverlayClick = (e) => {
     if (ref.current && !ref.current.contains(e.target)) {
       props.onCloseRequested();
     }
+  };
+
+  const handleLinkClick = () => {
+    props.onCloseRequested();
   };
 
   return (
@@ -26,29 +32,35 @@ function SettingsModal(props) {
           ${props.darkmode ? "bg-neutral-700" : "bg-[var(--color-accent0)]"}`}
         ref={ref}
       >
-        <div className="w-full flex flex-row justify-between mb-2">
-          <p className="text-2xl font-bold text-neutral-100">Menu</p>
-          <button
-            aria-label="Close"
-            className="px-4 py-1 rounded-lg hover:bg-neutral-300 active:bg-neutral-400 text-white"
-            onClick={props.onCloseRequested}
-          >
-            X
-          </button>
-        </div>
-
-        {links.map((link, index) => (
-          <div
-            key={index}
-            className="bg-neutral-100 w-3/4 h-8 rounded-2xl flex justify-center items-center hover:bg-neutral-200 active:bg-neutral-300"
-          >
-            <Link to={link.to}>
-              <button className="text-black" onClick={props.onCloseRequested}>
-                {link.label}
-              </button>
-            </Link>
+        {isLoading ? (
+          <div className="absolute flex justify-center items-center z-20 text-white size-55">
+            <Spinner />
           </div>
-        ))}
+        ) : (
+          <>
+            <div className="w-full flex flex-row justify-between mb-2">
+              <p className="text-2xl font-bold text-neutral-100">Menu</p>
+              <button
+                aria-label="Close"
+                className="px-4 py-1 rounded-lg hover:bg-neutral-300 active:bg-neutral-400 text-white"
+                onClick={props.onCloseRequested}
+              >
+                X
+              </button>
+            </div>
+
+            {links.map((link, index) => (
+              <Link
+                key={index}
+                to={link.to}
+                onClick={handleLinkClick}
+                className="bg-neutral-100 w-3/4 h-8 rounded-2xl flex justify-center items-center hover:bg-neutral-200 active:bg-neutral-300"
+              >
+                <p className="text-black">{link.label}</p>
+              </Link>
+            ))}
+          </>
+        )}
       </div>
     </div>
   );

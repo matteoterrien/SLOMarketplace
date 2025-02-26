@@ -8,17 +8,17 @@ function NavBar(props) {
   const [modal, setModal] = useState(false);
 
   function toggleModal() {
-    setModal(!modal);
+    setModal((prev) => !prev);
   }
 
   return (
     <>
-      {modal ? (
+      {modal && (
         <SettingsModal
           onCloseRequested={toggleModal}
           darkmode={props.darkmode}
         />
-      ) : null}
+      )}
 
       <header
         className={`flex flex-row justify-between items-center gap-2 px-6 py-4 sticky top-0 right-0 left-0 z-40 border-b-3 border-black
