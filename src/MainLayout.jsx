@@ -1,7 +1,5 @@
 import NavBar from "./components/NavBar.jsx";
-import Footer from "./components/Footer.jsx";
 import { Outlet } from "react-router";
-import { useState } from "react";
 
 export function MainLayout(props) {
   return (
@@ -12,7 +10,6 @@ export function MainLayout(props) {
       <section>
         <Outlet />
       </section>
-      <Footer />
     </main>
   );
 }

@@ -1,6 +1,6 @@
 const ITEMS_DEMO = [
   {
-    id: 0,
+    id: 1,
     image: "/images/sociology_textbook.png", // Placeholder image URL
     price: "10",
     title: "Product 1",
@@ -9,7 +9,7 @@ const ITEMS_DEMO = [
     categories: ["School"],
   },
   {
-    id: 1,
+    id: 2,
     image: "/images/sociology_textbook.png", // Placeholder image URL
     price: "20",
     title: "Product 2",
@@ -18,7 +18,7 @@ const ITEMS_DEMO = [
     categories: ["Mens Clothes"],
   },
   {
-    id: 2,
+    id: 3,
     image: "/images/sociology_textbook.png", // Placeholder image URL
     price: "30",
     title: "Product 3",
@@ -27,7 +27,7 @@ const ITEMS_DEMO = [
     categories: ["Womens Clothes"],
   },
   {
-    id: 3,
+    id: 4,
     image: "/images/sociology_textbook.png", // Placeholder image URL
     price: "40",
     title: "Product 4",
@@ -37,7 +37,7 @@ const ITEMS_DEMO = [
     categories: ["Unisex Clothes"],
   },
   {
-    id: 4,
+    id: 5,
     image: "/images/sociology_textbook.png", // Placeholder image URL
     price: "50",
     title: "Product 5",

@@ -4,6 +4,7 @@ import Homepage from "./pages/Homepage";
 import { MainLayout } from "./MainLayout.jsx";
 import ItemPage from "./pages/ItemPage.jsx";
 import ProfilePage from "./pages/ProfilePage.jsx";
+import AddItemPage from "./pages/AddItemPage.jsx";
 
 function App() {
   const [username, setUsername] = useState("Matteo");
@@ -36,6 +37,7 @@ function App() {
             />
           }
         />
+        <Route path="/new" element={<AddItemPage darkmode={darkmode} />} />
       </Route>
     </Routes>
   );

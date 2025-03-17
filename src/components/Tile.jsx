@@ -15,8 +15,16 @@ function Tile(props) {
             props.darkmode ? "text-neutral-300" : "text-black"
           }`}
         >
-          <p className="basis-1/3">${props.item.price}</p>
-          <p className="basis-2/3 font-bold">{props.item.title}</p>
+          {props.item.price ? (
+            <p className="basis-1/3">${props.item.price}</p>
+          ) : null}
+          <p
+            className={`font-bold ${
+              props.item.price ? "basis-2/3" : "flex justify-center w-full"
+            }`}
+          >
+            {props.item.title}
+          </p>
         </div>
       </Link>
     </div>

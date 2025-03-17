@@ -6,7 +6,9 @@ import ITEMS_DEMO from "../data";
 
 function ItemPage(props) {
   const navigate = useNavigate();
+
   const { itemId } = useParams();
+
   const post = ITEMS_DEMO[itemId];
 
   const redirectPage = () => {
