@@ -14,8 +14,6 @@ const RegisterPage: FC<RegisterPageProps> = ({ onLogin }) => {
     username: string;
     password: string;
   }): Promise<{ type: string; message: string }> {
-    console.log("Registering user:", username, password);
-
     const response = await sendPostRequest("/auth/register", {
       username,
       password,
@@ -28,7 +26,6 @@ const RegisterPage: FC<RegisterPageProps> = ({ onLogin }) => {
         return { type: "error", message: "Missing token in response." };
       }
 
-      console.log("Extracted Token:", token);
       onLogin(token);
 
       return { type: "success", message: "Registration successful!" };

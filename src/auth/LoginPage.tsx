@@ -36,7 +36,6 @@ const LoginPage: FC<LoginPageProps> = ({ onLogin }) => {
         };
       }
 
-      console.log("Authentication Token:", token);
       onLogin(token);
       navigate("/");
 

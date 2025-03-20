@@ -57,12 +57,6 @@ const AddItemPage: FC<AddItemPageProps> = (props) => {
         uploadData.append("details", descriptionTrimmed);
         uploadData.append("categirues", JSON.stringify(categories));
 
-        console.log(
-          "Form Data:",
-          uploadData.get("image"),
-          uploadData.get("title")
-        );
-
         const response = await fetch("/api/items", {
           method: "POST",
           body: uploadData,
