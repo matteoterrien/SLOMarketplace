@@ -47,7 +47,7 @@ const ItemPage: FC<ItemPageProps> = ({ darkmode, authToken }) => {
           <img
             src={item.image ?? "/images/default.jpg"}
             alt={item.title}
-            className="border-1 border-black rounded-lg self-center mb-2 relative z-10 top-0 max-w-2xl max-h-96"
+            className="border-1 border-black rounded-lg self-center mb-2 relative z-10 top-0 w-fit md:max-w-2xl max-h-96"
           />
 
           <div className="flex flex-col mx-6 w-1/2 md:w-1/3">

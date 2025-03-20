@@ -39,12 +39,16 @@ const Menu: FC<MenuProps> = (props) => {
   async function handleSelectChange(
     e: React.ChangeEvent<HTMLSelectElement>
   ): Promise<void> {
-    const selectedCategory: string = e.target.value;
+    let selectedCategory: string = e.target.value;
 
     setIsLoading(true);
     setSearchBar("");
 
     await delayMs(1000);
+
+    if (!selectedCategory || selectedCategory === "") {
+      selectedCategory = "All";
+    }
 
     setCategory(selectedCategory);
     props.filterItems(selectedCategory);
@@ -87,11 +91,11 @@ const Menu: FC<MenuProps> = (props) => {
         className={
           "flex bg-neutral-300 rounded-lg p-3 w-fit text-neutral-600 hover:bg-stone-300 disabled:opacity-50 md:w-full"
         }
-        value={category}
+        value={category || "All"}
         onChange={handleSelectChange}
         disabled={isLoading}
       >
-        <option value="" disabled hidden>
+        <option value="All" disabled hidden>
           Select a category
         </option>
         {CATEGORIES.map((category: string, index: number) => (

@@ -39,6 +39,7 @@ const AddItemPage: FC<AddItemPageProps> = (props) => {
       const titleTrimmed = title.trim();
       const priceTrimmed = price.trim();
       const descriptionTrimmed = description.trim();
+      const categories = ["All"];
 
       if (!file || !titleTrimmed || !priceTrimmed || !descriptionTrimmed) {
         console.log("Missing required fields!");
@@ -54,6 +55,7 @@ const AddItemPage: FC<AddItemPageProps> = (props) => {
         uploadData.append("title", titleTrimmed);
         uploadData.append("price", priceTrimmed);
         uploadData.append("details", descriptionTrimmed);
+        uploadData.append("categirues", JSON.stringify(categories));
 
         console.log(
           "Form Data:",

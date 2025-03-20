@@ -10,7 +10,6 @@ interface LinkItem {
 const links: LinkItem[] = [
   { to: "/", label: "Home" },
   { to: "/profile", label: "Profile Page" },
-  { to: "/", label: "Messages" },
 ];
 
 interface SettingsModalProps {

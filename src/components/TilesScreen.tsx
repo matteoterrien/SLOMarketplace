@@ -8,7 +8,7 @@ const createPost: Item = {
   price: "",
   title: "Create New Post",
   details: "",
-  categories: [],
+  categories: ["All"],
   author: null,
 };
 

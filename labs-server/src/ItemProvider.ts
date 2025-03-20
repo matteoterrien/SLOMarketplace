@@ -41,7 +41,7 @@ export class ItemProvider {
       price: item.price,
       title: item.title,
       details: item.details,
-      categories: item.categories,
+      categories: item.categories || ["All"],
       author: item.author,
     }));
   }
