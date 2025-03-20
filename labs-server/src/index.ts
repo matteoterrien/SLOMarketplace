@@ -1,7 +1,6 @@
 import express, { Request, Response } from "express";
 import dotenv from "dotenv";
 import { MongoClient } from "mongodb";
-import { registerImageRoutes } from "./routes/images";
 import path from "path";
 import { registerAuthRoutes, verifyAuthToken } from "./routes/auth";
 import { registerItemsRoutes } from "./routes/items";
@@ -22,7 +21,7 @@ async function setUpServer() {
 
   app.use(express.json());
   app.use(express.static(staticDir));
-  app.use("labs-server/images", express.static(IMAGE_UPLOAD_DIR || ""));
+  app.use("/labs-server/images", express.static(IMAGE_UPLOAD_DIR || ""));
 
   // MongoDB
   let mongoClient: MongoClient;
@@ -44,8 +43,6 @@ async function setUpServer() {
   app.use("/api/*", verifyAuthToken);
 
   registerItemsRoutes(app, mongoClient);
-
-  registerImageRoutes(app, mongoClient);
 
   app.get("*", (req: Request, res: Response) => {
     res.sendFile(path.join(staticDir, "index.html"));
