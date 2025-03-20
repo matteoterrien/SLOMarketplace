@@ -8,6 +8,15 @@ interface AddItemPageProps {
   authToken: string | null;
 }
 
+const CATEGORIES: string[] = [
+  "School",
+  "Mens Clothes",
+  "Womens Clothes",
+  "Unisex Clothes",
+  "Music",
+  "Technology",
+];
+
 const AddItemPage: FC<AddItemPageProps> = (props) => {
   const navigate = useNavigate();
   const redirectPage = (): void => {
@@ -20,6 +29,7 @@ const AddItemPage: FC<AddItemPageProps> = (props) => {
   const [title, setTitle] = useState<string>("");
   const [price, setPrice] = useState<string>("");
   const [description, setDescription] = useState<string>("");
+  const [categories, setCategories] = useState<string[]>([]);
 
   function readAsDataURL(file: File): Promise<string | ArrayBuffer | null> {
     return new Promise((resolve, reject) => {
@@ -39,7 +49,7 @@ const AddItemPage: FC<AddItemPageProps> = (props) => {
       const titleTrimmed = title.trim();
       const priceTrimmed = price.trim();
       const descriptionTrimmed = description.trim();
-      const categories = ["All"];
+      const selectedCategories = categories.length > 0 ? categories : ["All"];
 
       if (!file || !titleTrimmed || !priceTrimmed || !descriptionTrimmed) {
         console.log("Missing required fields!");
@@ -55,7 +65,7 @@ const AddItemPage: FC<AddItemPageProps> = (props) => {
         uploadData.append("title", titleTrimmed);
         uploadData.append("price", priceTrimmed);
         uploadData.append("details", descriptionTrimmed);
-        uploadData.append("categirues", JSON.stringify(categories));
+        uploadData.append("categories", JSON.stringify(selectedCategories));
 
         const response = await fetch("/api/items", {
           method: "POST",
@@ -107,6 +117,19 @@ const AddItemPage: FC<AddItemPageProps> = (props) => {
     }
   }
 
+  function handleCategoryChange(event: React.ChangeEvent<HTMLSelectElement>) {
+    const selectedOptions = Array.from(
+      event.target.selectedOptions,
+      (option) => option.value
+    );
+
+    if (selectedOptions.includes("All")) {
+      setCategories(["All"]);
+    } else {
+      setCategories(selectedOptions);
+    }
+  }
+
   return (
     <div
       className={`flex flex-col items-center
@@ -147,15 +170,9 @@ const AddItemPage: FC<AddItemPageProps> = (props) => {
 
         <div className="self-center">
           {previewSrc && (
-            <img
-              style={{ maxWidth: "20em", maxHeight: "40em" }}
-              src={previewSrc}
-              alt="Preview"
-            />
+            <img className="w-fit max-h-96" src={previewSrc} alt="Preview" />
           )}
         </div>
-
-        {result && <p className={`message ${result.type}`}>{result.message}</p>}
 
         <div className="flex flex-row gap-2 items-center">
           <label className="text-xl">Title:</label>
@@ -191,6 +208,25 @@ const AddItemPage: FC<AddItemPageProps> = (props) => {
             className="w-full px-3 my-1 text-pretty border-2 mx-2 rounded-lg p-2"
           />
         </div>
+
+        <div className="flex flex-col gap-1">
+          <p className="text-xl">Select a Category:</p>
+          <select
+            multiple
+            className="border-2 rounded-lg p-2 h-36"
+            value={categories}
+            onChange={handleCategoryChange}
+            disabled={isPending}
+          >
+            {CATEGORIES.map((category) => (
+              <option key={category} value={category}>
+                {category}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        {result && <p className={`message ${result.type}`}>{result.message}</p>}
 
         <button
           type="submit"
