@@ -1,6 +1,12 @@
-import React from "react";
+import React, { FC } from "react";
 
-function ProfilePage(props) {
+interface ProfilePageProps {
+  darkmode: boolean;
+  username: string;
+  changeUsername: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+const ProfilePage: FC<ProfilePageProps> = (props) => {
   return (
     <div className="flex flex-col items-center m-4 gap-4">
       <img
@@ -22,6 +28,6 @@ function ProfilePage(props) {
       </label>
     </div>
   );
-}
+};
 
 export default ProfilePage;

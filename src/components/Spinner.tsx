@@ -1,7 +1,12 @@
-export function Spinner({ className }) {
-  const defaultClasses = "mr-3 -ml-1 size-5 animate-spin ";
-  // If className is undefined, don't want to append the string "undefined", but rather just an empty string
-  const additionalClasses = className || "";
+import React, { FC } from "react";
+
+interface SpinnerProps {
+  className?: string;
+}
+
+export const Spinner: FC<SpinnerProps> = ({ className }) => {
+  const defaultClasses: string = "mr-3 -ml-1 size-5 animate-spin ";
+  const additionalClasses: string = className || "";
 
   return (
     <svg
@@ -25,4 +30,4 @@ export function Spinner({ className }) {
       />
     </svg>
   );
-}
+};

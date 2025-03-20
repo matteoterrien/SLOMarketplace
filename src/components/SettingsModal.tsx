@@ -1,19 +1,29 @@
-import { useRef, useState } from "react";
-import { Link } from "react-router";
+import React, { FC, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { Spinner } from "./Spinner";
 
-const links = [
+interface LinkItem {
+  to: string;
+  label: string;
+}
+
+const links: LinkItem[] = [
   { to: "/", label: "Home" },
   { to: "/profile", label: "Profile Page" },
   { to: "/", label: "Messages" },
 ];
 
-function SettingsModal(props) {
-  const ref = useRef(null);
-  const [isLoading, setIsLoading] = useState(false);
+interface SettingsModalProps {
+  onCloseRequested: () => void;
+  darkmode?: boolean;
+}
 
-  const handleOverlayClick = (e) => {
-    if (ref.current && !ref.current.contains(e.target)) {
+const SettingsModal: FC<SettingsModalProps> = (props) => {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (ref.current && !ref.current.contains(e.target as Node)) {
       props.onCloseRequested();
     }
   };
@@ -28,7 +38,7 @@ function SettingsModal(props) {
       onClick={handleOverlayClick}
     >
       <div
-        className={` flex flex-col items-center w-1/2 md:w-1/3 lg:w-1/4 h-1/2 p-4 rounded-2xl gap-3
+        className={`flex flex-col items-center w-1/2 md:w-1/3 lg:w-1/4 h-1/2 p-4 rounded-2xl gap-3
           ${props.darkmode ? "bg-neutral-700" : "bg-[var(--color-accent0)]"}`}
         ref={ref}
       >
@@ -64,6 +74,6 @@ function SettingsModal(props) {
       </div>
     </div>
   );
-}
+};
 
 export default SettingsModal;

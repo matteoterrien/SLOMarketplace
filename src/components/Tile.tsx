@@ -1,12 +1,18 @@
-import React from "react";
+import React, { FC } from "react";
 import { Link } from "react-router";
+import { Item } from "./useItems";
 
-function Tile(props) {
+interface TileProps {
+  item: Item;
+  darkmode: boolean;
+}
+
+const Tile: FC<TileProps> = (props) => {
   return (
     <div className="flex flex-col rounded-lg hover:outline-2">
-      <Link to={"/" + props.item.id}>
+      <Link to={"/" + props.item._id}>
         <img
-          src={props.item.image}
+          src={props.item.image ?? "/images/noimage.jpg"}
           alt={props.item.title}
           className="object-cover w-full h-48 border-3 rounded-lg hover:rounded-b-none"
         />
@@ -29,6 +35,6 @@ function Tile(props) {
       </Link>
     </div>
   );
-}
+};
 
 export default Tile;

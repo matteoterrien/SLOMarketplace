@@ -1,37 +1,45 @@
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { Spinner } from "./Spinner";
 
-const CATEGORIES = [
+const CATEGORIES: string[] = [
   "All",
   "School",
   "Mens Clothes",
   "Womens Clothes",
   "Unisex Clothes",
   "Music",
+  "Technology",
 ];
 
-function delayMs(ms) {
+function delayMs(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-function Menu(props) {
-  const [searchBar, setSearchBar] = useState("");
-  const [isFocusedSearch, setIsFocusedSearch] = useState(false);
-  const [category, setCategory] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+interface MenuProps {
+  filterItems: (category: string) => void;
+  search: (query: string) => void;
+}
 
-  const handleFocusSearch = () => {
+const Menu: FC<MenuProps> = (props) => {
+  const [searchBar, setSearchBar] = useState<string>("");
+  const [isFocusedSearch, setIsFocusedSearch] = useState<boolean>(false);
+  const [category, setCategory] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const handleFocusSearch = (): void => {
     setIsFocusedSearch(true);
   };
 
-  const handleBlurSearch = () => {
+  const handleBlurSearch = (): void => {
     setIsFocusedSearch(false);
   };
 
-  async function handleSelectChange(e) {
-    const selectedCategory = e.target.value;
+  async function handleSelectChange(
+    e: React.ChangeEvent<HTMLSelectElement>
+  ): Promise<void> {
+    const selectedCategory: string = e.target.value;
 
     setIsLoading(true);
     setSearchBar("");
@@ -44,8 +52,10 @@ function Menu(props) {
     setIsLoading(false);
   }
 
-  async function handleInputChange(e) {
-    const selectedCategory = e.target.value;
+  async function handleInputChange(
+    e: React.ChangeEvent<HTMLInputElement>
+  ): Promise<void> {
+    const selectedCategory: string = e.target.value;
 
     setCategory("All");
     setSearchBar(selectedCategory);
@@ -77,12 +87,14 @@ function Menu(props) {
         className={
           "flex bg-neutral-300 rounded-lg p-3 w-fit text-neutral-600 hover:bg-stone-300 disabled:opacity-50 md:w-full"
         }
-        placeholder="Categories"
         value={category}
         onChange={handleSelectChange}
         disabled={isLoading}
       >
-        {CATEGORIES.map((category, index) => (
+        <option value="" disabled hidden>
+          Select a category
+        </option>
+        {CATEGORIES.map((category: string, index: number) => (
           <option key={index} value={category}>
             {category}
           </option>
@@ -90,11 +102,11 @@ function Menu(props) {
       </select>
       {isLoading ? (
         <div className="flex items-center justify-center">
-          <Spinner />
+          <Spinner className={undefined} />
         </div>
       ) : null}
     </div>
   );
-}
+};
 
 export default Menu;
