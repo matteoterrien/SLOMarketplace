@@ -22,7 +22,7 @@ async function setUpServer() {
 
   app.use(express.json());
   app.use(express.static(staticDir));
-  app.use("./public/images", express.static(IMAGE_UPLOAD_DIR || ""));
+  app.use("labs-server/images", express.static(IMAGE_UPLOAD_DIR || ""));
 
   // MongoDB
   let mongoClient: MongoClient;
