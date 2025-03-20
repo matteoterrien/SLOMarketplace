@@ -5,6 +5,7 @@ import { sendPostRequest } from "./sendPostRequest";
 
 interface LoginPageProps {
   onLogin: (token: string) => void;
+  darkmode: boolean;
 }
 
 interface LoginResponse {
@@ -12,7 +13,7 @@ interface LoginResponse {
   message: string;
 }
 
-const LoginPage: FC<LoginPageProps> = ({ onLogin }) => {
+const LoginPage: FC<LoginPageProps> = ({ onLogin, darkmode }) => {
   const navigate = useNavigate();
 
   async function handleLogin({
@@ -51,9 +52,11 @@ const LoginPage: FC<LoginPageProps> = ({ onLogin }) => {
   }
 
   return (
-    <div className="flex flex-col gap-2 mt-5 items-center">
-      <h2 className="text-2xl">Login</h2>
-      <UsernamePasswordForm onSubmit={handleLogin} />
+    <div className={`flex flex-col gap-2 mt-5 items-center`}>
+      <h2 className={`text-2xl ${darkmode ? "text-white" : "text-black"}`}>
+        Login
+      </h2>
+      <UsernamePasswordForm onSubmit={handleLogin} darkmode={darkmode} />
       <Link to="/register">
         <h3 className="bg-[var(--color-accent0)] hover:bg-green-900 active:bg-green-950 text-white p-2 rounded-xl mt-">
           Don't have an account? Register Here!

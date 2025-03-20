@@ -4,9 +4,10 @@ import { sendPostRequest } from "./sendPostRequest";
 
 interface RegisterPageProps {
   onLogin: (token: string) => void;
+  darkmode: boolean;
 }
 
-const RegisterPage: FC<RegisterPageProps> = ({ onLogin }) => {
+const RegisterPage: FC<RegisterPageProps> = ({ onLogin, darkmode }) => {
   async function handleRegister({
     username,
     password,
@@ -44,8 +45,10 @@ const RegisterPage: FC<RegisterPageProps> = ({ onLogin }) => {
 
   return (
     <div className="flex flex-col gap-2 mt-5 items-center">
-      <h2 className="text-2xl">Register a New Account</h2>
-      <UsernamePasswordForm onSubmit={handleRegister} />
+      <h2 className={`text-2xl ${darkmode ? "text-white" : "text-black"}`}>
+        Register a New Account
+      </h2>
+      <UsernamePasswordForm onSubmit={handleRegister} darkmode={darkmode} />
     </div>
   );
 };

@@ -38,9 +38,12 @@ const App: React.FC = () => {
       >
         <Route
           path="/register"
-          element={<RegisterPage onLogin={handleLogin} />}
+          element={<RegisterPage onLogin={handleLogin} darkmode={darkmode} />}
         />
-        <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
+        <Route
+          path="/login"
+          element={<LoginPage onLogin={handleLogin} darkmode={darkmode} />}
+        />
         <Route
           path="/"
           element={

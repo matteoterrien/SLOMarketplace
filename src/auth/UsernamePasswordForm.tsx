@@ -5,9 +5,13 @@ interface UsernamePasswordFormProps {
     username: string;
     password: string;
   }) => Promise<{ type: string; message: string }>;
+  darkmode: boolean;
 }
 
-const UsernamePasswordForm: FC<UsernamePasswordFormProps> = ({ onSubmit }) => {
+const UsernamePasswordForm: FC<UsernamePasswordFormProps> = ({
+  onSubmit,
+  darkmode,
+}) => {
   const [error, setError] = useState<boolean>(false);
   const [result, submitAction, isPending] = useActionState(
     async (previousState: any, formData: FormData) => {
@@ -37,26 +41,42 @@ const UsernamePasswordForm: FC<UsernamePasswordFormProps> = ({ onSubmit }) => {
       {isPending && <p className="message loading">Loading ...</p>}
       <form
         action={submitAction}
-        className="flex flex-col gap-5 border-2 rounded-xl p-5 self-center items-center"
+        className={`flex flex-col gap-5 border-2 rounded-xl p-5 self-center items-center ${
+          darkmode ? "text-white" : "text-black"
+        }`}
       >
         <div>
-          <label htmlFor="username">Username:</label>
+          <label
+            htmlFor="username"
+            className={`${darkmode ? "text-white" : "text-black"}`}
+          >
+            Username:
+          </label>
           <input
             type="text"
             id="username"
             name="username"
             disabled={isPending}
-            className="border-2 ml-2 rounded-lg"
+            className={`border-2 ml-2 rounded-lg ${
+              darkmode ? "text-white" : "text-black"
+            }`}
           />
         </div>
         <div>
-          <label htmlFor="password">Password:</label>
+          <label
+            htmlFor="password"
+            className={`${darkmode ? "text-white" : "text-black"}`}
+          >
+            Password:
+          </label>
           <input
             type="password"
             id="password"
             name="password"
             disabled={isPending}
-            className="border-2 ml-2 rounded-lg"
+            className={`border-2 ml-2 rounded-lg ${
+              darkmode ? "text-white" : "text-black"
+            }`}
           />
         </div>
         <button
